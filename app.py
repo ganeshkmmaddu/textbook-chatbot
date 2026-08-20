@@ -2,6 +2,7 @@ corpus_source = "swebok" # Guide to the Software Engineering Body of Knowledge
 # corpus_source = "default" # "Software Engineering: A PRACTITIONER’S APPROACH"
 
 import os
+import secrets
 
 # Add corpus source to enviroment variables
 CORPUS_SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"data/{corpus_source}")
@@ -22,8 +23,9 @@ if __name__ == "__main__":
         streamlit.main()
     else:
         # Set the environment variable to indicate Streamlit is running
-        os.environ["STREAMLIT_RUNNING"] = "1"    
+        os.environ["STREAMLIT_RUNNING"] = "1"
+        jupyter_token = os.getenv("JUPYTER_TOKEN") or secrets.token_urlsafe(32)
         # Start Streamlit as a background process
         subprocess.Popen(["streamlit", "run", __file__,"--server.port=5003", "--server.address=0.0.0.0", "--server.baseUrlPath=/team3"])
         # Start Jupyter Notebook
-        subprocess.run(["jupyter", "notebook","--ip=0.0.0.0", "--port=6003","--no-browser", "--allow-root","--NotebookApp.base_url=/team3/jupyter","--NotebookApp.token=''", "--NotebookApp.password=''", "--notebook-dir=/app/jupyter"])
+        subprocess.run(["jupyter", "notebook","--ip=0.0.0.0", "--port=6003","--no-browser", "--allow-root","--NotebookApp.base_url=/team3/jupyter", f"--NotebookApp.token={jupyter_token}", "--notebook-dir=/app/jupyter"])

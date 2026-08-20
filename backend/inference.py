@@ -77,7 +77,13 @@ rewrite_llm = ChatMistralAI(model="open-mistral-7b", mistral_api_key=get_api_key
 
 # Guardrails
 register_llm_provider("mistral", ChatMistralAI)
-guardrails = RunnableRails(config, input_key="question", output_key="answer")
+response_chain = get_prompt() | llm
+guardrails = RunnableRails(
+    config,
+    input_key="question",
+    output_key="answer",
+    runnable=response_chain,
+)
 
 def fetch_relevant_documents(question: str) -> Tuple[List[str], str]:
     """
@@ -178,13 +184,13 @@ def chat_completion(question: str) -> Tuple[str, str]:
                 yield UNANSWERABLE_MSG, MODEL_NAME
                 return
 
-    # LLM inference using Nemo Guardrails
-    messages = get_prompt().format_messages(input=question, context=context)
-    # Stream response from LLM
+    # Stream the response through Nemo Guardrails.
     full_response = {"answer": ""}
-    for chunk in llm.stream(messages):
-        full_response["answer"] += chunk.content
-        yield (chunk.content, MODEL_NAME)
+    for chunk in guardrails.stream({"question": question, "context": context}):
+        answer_chunk = chunk.get("answer", "") if isinstance(chunk, dict) else chunk.content
+        if answer_chunk:
+            full_response["answer"] += answer_chunk
+            yield (answer_chunk, MODEL_NAME)
 
     # Handle citations if available
     if relevant_docs:

@@ -1,4 +1,5 @@
 import os
+import secrets
 import subprocess
 import sys
 import time
@@ -32,10 +33,19 @@ def stop_and_remove_containers(ports):
             sys.exit(1)
 
 
-def build_docker_image(mistral_key):
+def write_runtime_env(mistral_key):
+    """Write local-only runtime credentials excluded by .gitignore."""
+    jupyter_token = secrets.token_urlsafe(32)
+    with open(".env", "w") as env_file:
+        env_file.write(f"MISTRAL_API_KEY={mistral_key}\n")
+        env_file.write(f"JUPYTER_TOKEN={jupyter_token}\n")
+    return jupyter_token
+
+
+def build_docker_image():
     """Build the Docker image."""
     print("Building the Docker image...")
-    run_command(f"docker build -t team3-app . --build-arg MISTRAL={mistral_key}", "Failed to build Docker image")
+    run_command("docker build -t team3-app .", "Failed to build Docker image")
 
 
 def display_loading_bar(duration):
@@ -68,7 +78,7 @@ def display_loading_bar(duration):
 def run_docker_container():
     """Run the Docker container."""
     print("Running the Docker container...")
-    run_command("docker run -d -p 5003:5003 team3-app", "Failed to run Docker container")
+    run_command("docker run -d --env-file .env -p 5003:5003 -p 6003:6003 team3-app", "Failed to run Docker container")
     print("Docker container started successfully!")
     display_loading_bar(30)  # 30 seconds duration
     print("You can now access the application:")
@@ -85,7 +95,8 @@ def main():
 
     # Step 2: Build the Docker image
     mistral_key = input("Enter your Mistral API key: ")
-    build_docker_image(mistral_key)
+    write_runtime_env(mistral_key)
+    build_docker_image()
 
     # Step 3: Run the Docker container
     run_docker_container()

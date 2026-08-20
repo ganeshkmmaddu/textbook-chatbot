@@ -84,7 +84,8 @@ jupyter notebook --port=6003
 
 - This will open the Jupyter Notebook interface in your web browser, where you can open ```main.ipynb``` and run it.
 
-- If it doesn't open, use the following link: http://localhost:6003/tree
+- If it doesn't open, use the following link: http://localhost:6003/team3/jupyter/tree
+- Jupyter requires the `JUPYTER_TOKEN` value from your `.env` file.
 
 - For advanced testing and debugging, refer to the provided [Jupyter notebook](https://sec.cse.csusb.edu/team3/jupyter).
 
@@ -124,12 +125,12 @@ If for any reason you cannot use `setup.py`, follow the steps below:
 
 5. **Build Docker Image**:
    ```bash
-   docker build -t team3-app . --build-arg MISTRAL=<your_api_key>
+   docker build -t team3-app .
    ```
 
 6. **Run Docker Container**:
    ```bash
-   docker run -d -p 5003:5003 team3-app
+   docker run -d --env-file .env -p 5003:5003 -p 6003:6003 team3-app
    ```
 **Access the Application**:
    - Website: [http://localhost:5003/team3](http://localhost:5003/team3)
