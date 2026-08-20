@@ -1,6 +1,8 @@
 # Textbook Chatbot
 
-This chatbot is as an educational tool that's built to answer questions related to the Swebok textbook, [Software Engineering Body of Knowledge (SWEBOK)](https://www.computer.org/education/bodies-of-knowledge/software-engineering). The chatbot was built by team 3 for [CSE 6550: Software Engineering Concepts](https://catalog.csusb.edu/coursesaz/cse/)
+This chatbot is an educational tool built to answer questions related to the SWEBOK textbook, [Software Engineering Body of Knowledge (SWEBOK)](https://www.computer.org/education/bodies-of-knowledge/software-engineering). This repository is maintained by **Ganesh Maddu** for [CSE 6550: Software Engineering Concepts](https://catalog.csusb.edu/coursesaz/cse/).
+
+[GitHub repository](https://github.com/ganeshkmmaddu/textbook-chatbot)
 
 [Website](https://sec.cse.csusb.edu/team3/)  
 [Jupyter notebook](https://sec.cse.csusb.edu/team3/jupyter)
@@ -21,12 +23,12 @@ The `setup.py` script automates the setup process, including downloading the rep
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/DrAlzahraniProjects/csusb_fall2024_cse6550_team3.git
+   git clone https://github.com/ganeshkmmaddu/textbook-chatbot.git
    ```
 
 2. **Navigate to the Project Directory**:
    ```bash
-   cd csusb_fall2024_cse6550_team3
+   cd textbook-chatbot
    ```
 3. **Update Local Repository**:
    ```
@@ -53,7 +55,7 @@ The `setup.py` script automates the setup process, including downloading the rep
 
 To run the Jupyter Notebook independently from the repository, please follow these steps:
 
- Jupyter Notebook: [main.ipynb](https://github.com/DrAlzahraniProjects/csusb_fall2024_cse6550_team3/blob/main/jupyter/main.ipynb)
+ Jupyter Notebook: [main.ipynb](https://github.com/ganeshkmmaddu/textbook-chatbot/blob/main/jupyter/main.ipynb)
 
 1. Download the Required File:
 
@@ -71,7 +73,7 @@ To run the Jupyter Notebook independently from the repository, please follow the
 
 - Open a terminal and use the `cd` command to navigate to the directory where you saved ```main.ipynb```. For example:
 ```bash
-  cd ~/csusb_fall2024_cse6550_team3/jupyter
+   cd ~/textbook-chatbot/jupyter
 ```
 5. Launch Jupyter Notebook:
 
@@ -93,12 +95,12 @@ If for any reason you cannot use `setup.py`, follow the steps below:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/DrAlzahraniProjects/csusb_fall2024_cse6550_team3.git
+   git clone https://github.com/ganeshkmmaddu/textbook-chatbot.git
    ```
 
 2. **Navigate to the Project Directory**:
    ```bash
-   cd csusb_fall2024_cse6550_team3
+   cd textbook-chatbot
    ```
 
 3. **Pull Updates**:
@@ -196,7 +198,7 @@ Below is a list of answerable and unanswerable questions that will be used to ev
 
 ## Affiliation
 
-Built by **Team 3**  
+Maintained by **Ganesh Maddu**
 Course: CSE 6550, Fall '24 (Software Engineering Concepts)  
 Institution: California State University, San Bernardino  
 
